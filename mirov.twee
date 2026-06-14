@@ -1,0 +1,265 @@
+:: StoryTitle
+aaaa
+
+
+:: StoryData
+{
+  "ifid": "380436F2-A6C3-4378-A65C-AC25F95FA223",
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Параграф без названия",
+  "zoom": 1
+}
+
+
+:: Параграф без названия {"position":"500,175","size":"100,100"}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Практика у мировых судей · 20 дней</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background: #0a0c12;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+            padding: 16px;
+        }
+
+        .novella-container {
+            max-width: 800px;
+            width: 100%;
+            background: #11141f;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,215,0,0.2);
+            overflow: hidden;
+        }
+
+        .art-area {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(145deg, #1a1f2e 0%, #0b0f18 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid #ffd96655;
+        }
+
+        .bg-mood {
+            font-size: 1.4rem;
+            color: #7e8aa8;
+            text-align: center;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: rgba(0,0,0,0.5);
+            padding: 12px 24px;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            font-family: monospace;
+        }
+
+        .practice-header {
+            background: #0d111acc;
+            backdrop-filter: blur(8px);
+            padding: 10px 24px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #ffdf8c;
+            border-bottom: 1px solid #2a2f40;
+            font-weight: 500;
+        }
+
+        .day-counter {
+            background: #00000066;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-family: monospace;
+        }
+
+        .dialog-panel {
+            background: #0f121ce6;
+            backdrop-filter: blur(12px);
+            padding: 28px 30px 30px 30px;
+        }
+
+        .speaker {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #f5c542;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            display: inline-block;
+            border-left: 4px solid #f5c542;
+            padding-left: 14px;
+        }
+
+        .message-text {
+            font-size: 1.15rem;
+            line-height: 1.55;
+            color: #ececec;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 130px;
+            margin-bottom: 30px;
+            font-weight: 400;
+            text-shadow: 0 1px 2px black;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: #1e243b;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            font-family: monospace;
+            color: #f2e8cf;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex: 1;
+            min-width: 120px;
+            border: 1px solid #3a405b;
+            letter-spacing: 0.5px;
+        }
+
+        button:hover {
+            background: #2f3657;
+            border-color: #ffd966;
+            color: #ffeaac;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        @media (max-width: 550px) {
+            .dialog-panel { padding: 20px; }
+            .message-text { font-size: 1rem; min-height: 150px; }
+            button { padding: 10px 14px; font-size: 0.8rem; }
+            .bg-mood { font-size: 1rem; padding: 8px 16px; }
+        }
+    </style>
+</head>
+<body>
+<div class="novella-container">
+    <div class="art-area">
+        <div class="bg-mood">⚖️ МИРОВОЙ СУД ⚖️<br>ПРОИЗВОДСТВЕННАЯ ПРАКТИКА</div>
+    </div>
+
+    <div class="practice-header">
+        <span>📁 Судебный участок · Мировой судья</span>
+        <span class="day-counter" id="dayCounter">День 1 / 20</span>
+    </div>
+
+    <div class="dialog-panel">
+        <div class="speaker" id="speakerName">📋 Задание</div>
+        <div class="message-text" id="dialogText">
+            Начало практики. Первое задание...
+        </div>
+        <div class="actions">
+            <button id="nextBtn">▶ ДАЛЕЕ</button>
+            <button id="resetBtn">🔄 НАЧАТЬ ЗАНОВО</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Три типа заданий — будут повторяться по кругу 20 дней
+    const taskTypes = [
+        {
+            speaker: "📑 Сравнение с БД",
+            text: "Задание: сравнить документы с базой данных по номеру дела. Сверяю судебные акты, проверяю корректность внесённых сведений. Расхождений не найдено."
+        },
+        {
+            speaker: "📂 Опись документов",
+            text: "Задание: работа с описью. Найти нужные листы в старых делах перед уничтожением. Извлекла и отметила документы согласно номенклатуре."
+        },
+        {
+            speaker: "🔍 Верификация и подсчёт",
+            text: "Задание: верификация и сверка данных. Подсчитываю листы в делах, проверяю нумерацию, сверяю с реестром. Всё точно, ошибок нет."
+        }
+    ];
+
+    let currentDay = 1;      // текущий день (1..20)
+    const totalDays = 20;
+
+    // DOM элементы
+    const dialogTextEl = document.getElementById("dialogText");
+    const speakerNameEl = document.getElementById("speakerName");
+    const dayCounterEl = document.getElementById("dayCounter");
+    const nextBtn = document.getElementById("nextBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    // Получить задание по номеру дня (циклически повторяем 3 типа)
+    function getTaskForDay(day) {
+        // Дни 1,4,7,10,13,16,19 -> тип 0 (сравнение с БД)
+        // Дни 2,5,8,11,14,17,20 -> тип 1 (опись)
+        // Дни 3,6,9,12,15,18     -> тип 2 (верификация)
+        const cycleIndex = (day - 1) % 3;
+        return taskTypes[cycleIndex];
+    }
+
+    function updateNovella() {
+        const task = getTaskForDay(currentDay);
+        speakerNameEl.innerHTML = task.speaker;
+        dialogTextEl.innerHTML = task.text;
+        dayCounterEl.innerHTML = `День ${currentDay} / ${totalDays}`;
+        
+        if (currentDay === totalDays) {
+            nextBtn.innerHTML = "🏁 ЗАВЕРШИТЬ ПРАКТИКУ";
+        } else {
+            nextBtn.innerHTML = "▶ ДАЛЕЕ";
+        }
+    }
+    
+    function nextStep() {
+        if (currentDay < totalDays) {
+            currentDay++;
+            updateNovella();
+        } else {
+            // Финальный экран
+            dialogTextEl.innerHTML = "✨✨✨<br><br>Производственная практика в аппарате мирового судьи успешно завершена!<br><br>20 дней позади. Все документы верифицированы, старые дела подготовлены к уничтожению, база данных актуальна.<br><br>Вы получили зачёт и положительную характеристику.✨✨✨";
+            speakerNameEl.innerHTML = "📜 Аттестационная комиссия";
+            nextBtn.innerHTML = "✅ ПРАКТИКА ЗАВЕРШЕНА";
+            nextBtn.disabled = true;
+            nextBtn.style.opacity = "0.5";
+            nextBtn.style.cursor = "default";
+        }
+    }
+    
+    function resetPractice() {
+        currentDay = 1;
+        updateNovella();
+        nextBtn.disabled = false;
+        nextBtn.style.opacity = "1";
+        nextBtn.style.cursor = "pointer";
+    }
+    
+    nextBtn.addEventListener("click", nextStep);
+    resetBtn.addEventListener("click", resetPractice);
+    
+    updateNovella();
+</script>
+</body>
+</html>
